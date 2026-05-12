@@ -151,47 +151,6 @@ Linux/macOS:
 docker-compose run --rm tester
 ```
 
-## Документация по тестовым файлам
-
-### `CrmSystemApplicationTests.java`
-
-- `contextLoads()` — тест запуска Spring-контекста приложения.
-
-### `SellerControllerTest.java`
-
-- `getAllSellers_SHOULD_ReturnListAndOkStatus()` — проверяет `GET /api/sellers`: код `200`, JSON-ответ и список продавцов.
-- `createSeller_SHOULD_ReturnCreatedStatus()` — проверяет `POST /api/sellers`: код `201` и вызов `sellerService.createSeller(...)`.
-- `deleteSeller_SHOULD_ReturnNoContent()` — проверяет `DELETE /api/sellers/{id}`: код `204` и вызов `sellerService.deleteSeller(id)`.
-
-### `TransactionControllerTest.java`
-
-- `createTransaction_SHOULD_ReturnCreated()` — проверяет `POST /api/transactions`: код `201` и вызов `transactionService.createTransaction(...)`.
-- `getBestSeller_SHOULD_ReturnSellerInfo()` — проверяет `GET /api/transactions/best-seller`: код `200` и корректные данные лучшего продавца.
-- `getProductiveHour_SHOULD_ReturnInteger()` — проверяет `GET /api/transactions/seller/{id}/productive-hour`: код `200` и числовой час в ответе.
-
-### `SellerServiceTest.java`
-
-- `createSeller_EXPECT_AutoSetRegistrationDate()` — проверяет автозаполнение `registrationDate`, если дата не задана.
-- `createSeller_EXPECT_InvokeRepositoryInsert()` — проверяет, что при создании продавца вызывается `sellerRepository.insert(...)`.
-- `deleteSeller_EXPECT_InvokeRepositoryDelete()` — проверяет, что удаление продавца делегируется в `sellerRepository.delete(...)`.
-
-### `TransactionServiceTest.java`
-
-- `createTransaction_EXPECT_AutoSetTransactionDate()` — проверяет автозаполнение `transactionDate` при создании транзакции.
-- `getBestSeller_EXPECT_ReturnSellerFromRepository()` — проверяет, что сервис возвращает лучшего продавца из репозитория.
-- `getMostProductiveHour_EXPECT_ReturnCorrectHourValue()` — проверяет корректность значения продуктивного часа.
-- `getSellersWithLowSales_EXPECT_ReturnFilteredList()` — проверяет фильтрацию продавцов с низкими продажами.
-- `getBestSeller_EXPECT_PassCorrectDatesToRepository()` — проверяет передачу корректного диапазона дат в репозиторий.
-
-### `RepositoryIntegrationTest.java`
-
-- `insertSeller_EXPECT_GeneratedIdInH2()` — проверяет, что при вставке продавца в H2 генерируется ID.
-- `findSellersWithSalesLessThan_EXPECT_CorrectFilteringInH2()` — проверяет SQL-фильтрацию продавцов по сумме продаж.
-- `findBestSeller_EXPECT_CorrectChampionInH2()` — проверяет SQL-логику выбора лучшего продавца за период.
-- `findMostProductiveHour_EXPECT_CorrectHourValueInH2()` — проверяет вычисление самого продуктивного часа продавца.
-- `findAll_EXPECT_ReturnAllNonDeletedSellers()` — проверяет, что `findAll()` возвращает активных (не удаленных) продавцов.
-- `deleteById_EXPECT_SellerIsMarkedAsDeleted()` — проверяет soft delete: продавец скрывается из активных и получает `is_deleted=true`.
-
 ## API: примеры использования
 
 Базовый URL: `http://localhost:8080`
@@ -299,6 +258,47 @@ http://localhost:8080/api/transactions/best-seller?start=2026-01-01T00:00:00&end
 3. Выберите файл `CRM_Full_API_Test.json`.
 4. Запустите приложение.
 5. Выполняйте запросы по группам: `Sellers` -> `Transactions` -> `Analytics`.
+
+## Документация по тестовым файлам
+
+### `CrmSystemApplicationTests.java`
+
+- `contextLoads()` — тест запуска Spring-контекста приложения.
+
+### `SellerControllerTest.java`
+
+- `getAllSellers_SHOULD_ReturnListAndOkStatus()` — проверяет `GET /api/sellers`: код `200`, JSON-ответ и список продавцов.
+- `createSeller_SHOULD_ReturnCreatedStatus()` — проверяет `POST /api/sellers`: код `201` и вызов `sellerService.createSeller(...)`.
+- `deleteSeller_SHOULD_ReturnNoContent()` — проверяет `DELETE /api/sellers/{id}`: код `204` и вызов `sellerService.deleteSeller(id)`.
+
+### `TransactionControllerTest.java`
+
+- `createTransaction_SHOULD_ReturnCreated()` — проверяет `POST /api/transactions`: код `201` и вызов `transactionService.createTransaction(...)`.
+- `getBestSeller_SHOULD_ReturnSellerInfo()` — проверяет `GET /api/transactions/best-seller`: код `200` и корректные данные лучшего продавца.
+- `getProductiveHour_SHOULD_ReturnInteger()` — проверяет `GET /api/transactions/seller/{id}/productive-hour`: код `200` и числовой час в ответе.
+
+### `SellerServiceTest.java`
+
+- `createSeller_EXPECT_AutoSetRegistrationDate()` — проверяет автозаполнение `registrationDate`, если дата не задана.
+- `createSeller_EXPECT_InvokeRepositoryInsert()` — проверяет, что при создании продавца вызывается `sellerRepository.insert(...)`.
+- `deleteSeller_EXPECT_InvokeRepositoryDelete()` — проверяет, что удаление продавца делегируется в `sellerRepository.delete(...)`.
+
+### `TransactionServiceTest.java`
+
+- `createTransaction_EXPECT_AutoSetTransactionDate()` — проверяет автозаполнение `transactionDate` при создании транзакции.
+- `getBestSeller_EXPECT_ReturnSellerFromRepository()` — проверяет, что сервис возвращает лучшего продавца из репозитория.
+- `getMostProductiveHour_EXPECT_ReturnCorrectHourValue()` — проверяет корректность значения продуктивного часа.
+- `getSellersWithLowSales_EXPECT_ReturnFilteredList()` — проверяет фильтрацию продавцов с низкими продажами.
+- `getBestSeller_EXPECT_PassCorrectDatesToRepository()` — проверяет передачу корректного диапазона дат в репозиторий.
+
+### `RepositoryIntegrationTest.java`
+
+- `insertSeller_EXPECT_GeneratedIdInH2()` — проверяет, что при вставке продавца в H2 генерируется ID.
+- `findSellersWithSalesLessThan_EXPECT_CorrectFilteringInH2()` — проверяет SQL-фильтрацию продавцов по сумме продаж.
+- `findBestSeller_EXPECT_CorrectChampionInH2()` — проверяет SQL-логику выбора лучшего продавца за период.
+- `findMostProductiveHour_EXPECT_CorrectHourValueInH2()` — проверяет вычисление самого продуктивного часа продавца.
+- `findAll_EXPECT_ReturnAllNonDeletedSellers()` — проверяет, что `findAll()` возвращает активных (не удаленных) продавцов.
+- `deleteById_EXPECT_SellerIsMarkedAsDeleted()` — проверяет soft delete: продавец скрывается из активных и получает `is_deleted=true`.
 
 ## Обработка ошибок
 
