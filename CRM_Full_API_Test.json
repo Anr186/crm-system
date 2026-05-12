@@ -16,7 +16,7 @@
                         "header": [],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Алексей Смирнов\",\n    \"contactInfo\": \"alex@example.com\"\n}",
+                            "raw": "{\n    \"name\": \"Михаил Бобиков\",\n    \"contactInfo\": \"alex@example.com\"\n}",
                             "options": {
                                 "raw": {
                                     "language": "json"
@@ -47,7 +47,7 @@
                         "header": [],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Алексей Обновленный\",\n    \"contactInfo\": \"new_alex@example.com\"\n}",
+                            "raw": "{\n    \"name\": \"Михаил Новый\",\n    \"contactInfo\": \"new_alex@example.com\"\n}",
                             "options": {
                                 "raw": {
                                     "language": "json"
