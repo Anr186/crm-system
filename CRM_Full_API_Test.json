@@ -1,0 +1,179 @@
+{
+    "info": {
+        "_postman_id": "a2b3c4d5-e6f7-4a1b-9c2d-3e4f5a6b7c8d",
+        "name": "CRM System Final Testing",
+        "description": "Полная коллекция для тестирования всех эндпоинтов CRM системы (Sellers, Transactions, Analytics)",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. Sellers (Продавцы)",
+            "item": [
+                {
+                    "name": "Create Seller",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Алексей Смирнов\",\n    \"contactInfo\": \"alex@example.com\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://localhost:8080/api/sellers"
+                    }
+                },
+                {
+                    "name": "Get All Active Sellers",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8080/api/sellers"
+                    }
+                },
+                {
+                    "name": "Get Seller By ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8080/api/sellers/1"
+                    }
+                },
+                {
+                    "name": "Update Seller",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Алексей Обновленный\",\n    \"contactInfo\": \"new_alex@example.com\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://localhost:8080/api/sellers/1"
+                    }
+                },
+                {
+                    "name": "Get Sellers with Low Sales",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/sellers/low-sales?threshold=1000",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "sellers",
+                                "low-sales"
+                            ],
+                            "query": [
+                                {
+                                    "key": "threshold",
+                                    "value": "1000"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Seller (Soft)",
+                    "request": {
+                        "method": "DELETE",
+                        "url": "http://localhost:8080/api/sellers/1"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "2. Transactions (Транзакции)",
+            "item": [
+                {
+                    "name": "Create Transaction",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"sellerId\": 1,\n    \"amount\": 5000.75,\n    \"paymentType\": \"CARD\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://localhost:8080/api/transactions"
+                    }
+                },
+                {
+                    "name": "Get All Transactions",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8080/api/transactions"
+                    }
+                },
+                {
+                    "name": "Get Transaction By ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8080/api/transactions/1"
+                    }
+                },
+                {
+                    "name": "Get Transactions By Seller ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8080/api/transactions/seller/1"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "3. Analytics (Аналитика)",
+            "item": [
+                {
+                    "name": "Get Best Seller in Period",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/transactions/best-seller?start=2026-01-01T00:00:00&end=2026-12-31T23:59:59",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "transactions",
+                                "best-seller"
+                            ],
+                            "query": [
+                                {
+                                    "key": "start",
+                                    "value": "2026-01-01T00:00:00"
+                                },
+                                {
+                                    "key": "end",
+                                    "value": "2026-12-31T23:59:59"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Most Productive Hour for Seller",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8080/api/transactions/seller/1/productive-hour"
+                    }
+                }
+            ]
+        }
+    ]
+}
