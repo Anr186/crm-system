@@ -7,7 +7,7 @@ COPY gradlew ./
 COPY gradlew.bat ./
 COPY src ./src
 
-RUN ./gradlew build
+RUN ./gradlew build --no-daemon
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
